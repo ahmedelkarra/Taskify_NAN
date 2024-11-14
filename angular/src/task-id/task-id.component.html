@@ -1,0 +1,91 @@
+@if (!isLoading && isUser && taskInfo?._id){
+<div class="grid grid-cols-12 gap-3 rounded-md w-[95%] md:w-[80%] mx-auto my-5 md:my-20">
+    <div
+        class="col-span-12 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance break-words">
+            {{taskInfo?.title}}</h5>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:justify-between my-2">
+
+            <div class="flex justify-center items-center gap-3">
+                <span
+                    class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="-ms-1 me-1.5 size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+
+                    <p class="whitespace-nowrap text-sm">{{taskInfo?.priority}}</p>
+                </span>
+                <span
+                    class="inline-flex items-center justify-center rounded-full bg-orange-100 px-2.5 py-0.5 text-orange-700">
+                    <p class="whitespace-nowrap text-sm">{{taskInfo?.completionPercentage}}%</p>
+                </span>
+            </div>
+
+            <div class="flex gap-3">
+
+                <a class="inline-block rounded bg-yellow-600 px-8 py-3 text-sm font-medium text-white transition hover:-rotate-2 hover:scale-110 focus:outline-none focus:ring active:bg-yellow-500"
+                    routerLink="/task/edit/{{taskInfo?._id}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5">
+                        <path fill="#ffffff"
+                            d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                    </svg>
+                </a>
+
+                <button (click)="handleDelete()"
+                    class="flex gap-2 rounded bg-red-600 px-8 py-3 text-sm font-medium text-white transition hover:-rotate-2 hover:scale-110 focus:outline-none focus:ring active:bg-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5">
+                        <path fill="#ffffff"
+                            d="M170.5 51.6L151.5 80l145 0-19-28.4c-1.5-2.2-4-3.6-6.7-3.6l-93.7 0c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80 368 80l48 0 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-8 0 0 304c0 44.2-35.8 80-80 80l-224 0c-44.2 0-80-35.8-80-80l0-304-8 0c-13.3 0-24-10.7-24-24S10.7 80 24 80l8 0 48 0 13.8 0 36.7-55.1C140.9 9.4 158.4 0 177.1 0l93.7 0c18.7 0 36.2 9.4 46.6 24.9zM80 128l0 304c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-304L80 128zm80 64l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+        <p class="font-normal text-gray-700 dark:text-gray-400 text-balance break-words">{{taskInfo?.description}}</p>
+    </div>
+</div>
+}
+
+@if (isLoading) {
+<div class="grid grid-cols-12 gap-3 rounded-md w-[95%] md:w-[80%] mx-auto my-5 md:my-20 animate-pulse">
+
+    <div
+        class="col-span-12 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div class="h-5 bg-gray-200 rounded-full dark:bg-gray-700 mb-4"></div>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:justify-between my-2">
+
+            <div class="flex justify-center items-center gap-3">
+                <div class="bg-gray-200 rounded-full dark:bg-gray-700 w-16 h-6"></div>
+                <div class="bg-gray-200 rounded-full dark:bg-gray-700 w-16 h-6"></div>
+            </div>
+
+            <div class="flex gap-3">
+                <div class="w-24 h-14 bg-gray-200 rounded-md dark:bg-gray-700 px-8 py-3"></div>
+                <div class="w-24 h-14 bg-gray-200 rounded-md dark:bg-gray-700 px-8 py-3"></div>
+            </div>
+
+        </div>
+
+        <div class="h-5 bg-gray-200 rounded-full dark:bg-gray-700 my-2.5"></div>
+        <div class="h-5 bg-gray-200 rounded-full dark:bg-gray-700 my-2.5"></div>
+    </div>
+
+
+</div>
+}
+
+@if (!isLoading && !taskInfo){
+<div class="grid grid-cols-12 h-32 gap-3 rounded-md w-[95%] md:w-[80%] mx-auto my-5 md:my-20">
+    <div
+        class="col-span-12 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-600 dark:text-white text-balance break-words">Error
+            Task</h5>
+        <p class="font-normal text-red-700 dark:text-red-400 text-balance break-words">task not found</p>
+    </div>
+</div>
+}

@@ -1,0 +1,63 @@
+<app-section />
+
+@if (!isLoading && isUser && taskInfo.length !== 0){
+<div class="grid grid-cols-12 gap-3 rounded-md w-[95%] md:w-[80%] mx-auto my-5 md:my-5">
+    @for (task of taskInfo; track $index) {
+    <a routerLink="/task/{{task._id}}"
+        class="col-span-12 md:col-span-6 xl:col-span-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance break-words">
+            {{task.title}}</h5>
+        <div class="flex justify-between">
+
+            <span
+                class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="-ms-1 me-1.5 size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <p class="whitespace-nowrap text-sm">{{task.priority}}</p>
+            </span>
+
+
+            <span
+                class="inline-flex items-center justify-center rounded-full bg-orange-100 px-2.5 py-0.5 text-orange-700">
+                <p class="whitespace-nowrap text-sm">{{task.completionPercentage}}%</p>
+            </span>
+
+        </div>
+        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-2 text-balance break-words">
+            {{task.description}}</p>
+    </a>
+    }
+</div>
+}
+
+@if (!isLoading && isUser && taskInfo.length === 0) { <div
+    class="flex justify-center gap-3 rounded-md w-[95%] md:w-[60%] mx-auto ">
+    <div
+        class="w-full p-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance break-words">No
+            task</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-2 text-balance break-words">You do not have
+            any task to show </p>
+    </div>
+</div>
+}
+
+@if (!isLoading && !isUser && taskInfo.length === 0) { <div
+    class="flex justify-center gap-3 rounded-md w-[95%] md:w-[60%] mx-auto ">
+    <div
+        class="w-full p-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-balance break-words">User
+            only</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-2 text-balance break-words">You have to login
+            or register to see this</p>
+    </div>
+</div>
+}
+
+@if (isLoading) {
+<app-taskSkeleton />
+}

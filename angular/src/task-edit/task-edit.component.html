@@ -1,0 +1,64 @@
+<section class="bg-gray-100">
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+            <div class="lg:col-span-2 lg:py-12">
+                <p class="max-w-xl text-lg">
+                    At the same time, the fact that we are wholly owned and totally independent from
+                    manufacturer and other group control gives you confidence that we will only recommend what
+                    is right for you.
+                </p>
+            </div>
+
+            <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+                <form class="space-y-4" (submit)="handleSubmit()" [formGroup]="formGroup">
+
+                    <input formControlName="title" class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                        placeholder="Title*" type="text" />
+
+                    <label for="priority"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority*</label>
+                    <select id="priority" formControlName="priority"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+
+                    <label for="status"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">status*</label>
+                    <select id="status" formControlName="status"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="not started">Not started</option>
+                        <option value="in progress">In progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="delayed">Delayed</option>
+                    </select>
+
+                    <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date*</label>
+                    <input id="date" formControlName="dueDate"
+                        class="w-full rounded-lg border-gray-200 p-3 text-sm border" type="date" />
+
+
+
+                        <input id="completion" formControlName="completionPercentage"
+                        max="100" min="0" maxlength="3"
+                        class="w-full rounded-lg border-gray-200 p-3 text-sm border" placeholder="Completion Percentage*"
+                        type="number" />
+
+                    <div>
+                        <textarea formControlName="description"
+                            class="w-full rounded-lg border-gray-200 p-3 text-sm border" placeholder="Description*"
+                            rows="8" id="message"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit"
+                            class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto">
+                            Edit Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

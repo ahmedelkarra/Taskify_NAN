@@ -1,0 +1,19 @@
+<div class="flex flex-col min-h-screen">
+    @if(isLoadingValue){
+    <app-headerSkeleton />
+    }
+    @if(!isLoadingValue){
+    <app-header />
+    }
+    <app-message />
+    <div class="flex-grow">
+        <router-outlet />
+    </div>
+
+    @if(isLoadingValue){
+    <app-footerSkeleton />
+    }
+    @if(!isLoadingValue){
+    <app-footer />
+    }
+</div>

@@ -1,0 +1,159 @@
+<header class="bg-white h-[100%]">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between gap-1">
+
+            <div class="md:flex md:items-center md:gap-12">
+                <a class="flex items-center space-x-2" routerLink="/" (click)="handleDontShowUp()">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="md:text-2xl font-semibold text-blue-500">Taskify</span>
+                </a>
+            </div>
+
+            <div class="hidden md:block">
+                <nav aria-label="Global">
+                    <ul class="flex items-center gap-6 text-sm">
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"
+                                (click)="handleDontShowUp()"> HOME </a>
+                        </li>
+
+                        @if (isUser && !isLoading) {
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/addtask"
+                                (click)="handleDontShowUp()"> ADD TASK </a>
+                        </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="sm:flex sm:gap-4">
+                    @if(!isUser){
+                    <a class="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                        (click)="handleDontShowUp()" routerLink="/login">
+                        Login
+                    </a>
+
+                    <div class="hidden sm:flex">
+                        <a class="rounded-md bg-blue-100 px-5 py-2.5 text-sm font-medium text-blue-500"
+                            (click)="handleDontShowUp()" routerLink="/register">
+                            Register
+                        </a>
+                    </div>
+                    }
+
+                    @if(isUser){
+                    <div class="relative">
+                        <button class="rounded-full text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                            (click)="handleShowUp()">
+                            <span class="sr-only">Menu</span>
+                            <div
+                                class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                <span
+                                    class="font-medium text-gray-600 dark:text-gray-300 uppercase">{{userInfo.first_name[0]
+                                    + userInfo.last_name[0]}}</span>
+                            </div>
+                        </button>
+                        @if(showUp){
+                        <div class="absolute end-0 z-10 mt-2 w-40 md:w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                            role="menu">
+                            <div class="p-2">
+                                <a routerLink="/profile" (click)="handleDontShowUp()"
+                                    class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                    role="menuitem">
+                                    Profile
+                                </a>
+
+                            </div>
+
+                            <div class="p-2">
+                                <button type="submit" (click)="handleLogout()"
+                                    class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                    role="menuitem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4">
+                                        <path fill="#b91c1c"
+                                            d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" />
+                                    </svg>
+
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    }
+                </div>
+
+
+                <div class="block md:hidden">
+
+                    <div class="inline-flex items-center overflow-hidden rounded-md border bg-white">
+                        <button class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                            (click)="handleMenuShowUp()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @if (menuShowUp) {
+                    <div class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                        role="menu">
+                        <div class="p-2">
+
+                            <a routerLink="/" (click)="handleDontShowUp()"
+                                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                role="menuitem">
+                                HOME
+                            </a>
+
+                            @if (isUser) {
+                            <a routerLink="/addtask" (click)="handleDontShowUp()"
+                                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                role="menuitem">
+                                ADD TASK
+                            </a>
+                            }
+
+                            @if (!isUser) {
+                            <a routerLink="/register" (click)="handleDontShowUp()"
+                                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                role="menuitem">
+                                REGISTER
+                            </a>
+                            }
+
+                        </div>
+
+                        @if (isUser) {
+                        <div class="p-2">
+                            <button type="submit" (click)="handleLogout()"
+                                class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                                role="menuitem">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5">
+                                    <path fill="#b91c1c"
+                                        d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" />
+                                </svg>
+                                LOGOUT
+                            </button>
+                        </div>
+                        }
+
+                    </div>
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</header>
